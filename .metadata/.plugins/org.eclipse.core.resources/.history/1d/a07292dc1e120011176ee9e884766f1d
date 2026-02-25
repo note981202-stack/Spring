@@ -1,0 +1,25 @@
+package com.example.demo;
+
+import java.sql.Connection;
+
+import javax.sql.DataSource;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+
+@SpringBootTest // 스프링 컨테이너 구성
+public class DataSourceTest {
+
+	
+	@Autowired DataSource datasource; // 커넥션 풀(10개)
+	
+	@Test
+	public void test() {
+		Connection conn = datasource.getConnection();
+		Statement conn.createStatement()
+		String sql = "select first_name from employees where employee_id = 100";
+		ResultSet re = smtm.executeQuery(sql);
+		
+	}
+}

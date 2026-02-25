@@ -1,0 +1,19 @@
+package com.example.demo;
+
+import org.junit.jupiter.api.Test;
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+
+@SpringBootTest
+public class SqlSessionFactoryTest {
+
+	@Autowired EmpMapper empMapper;
+	
+	@Test
+	public void test() {
+		Map map =empMapper.findById(100);
+		System.out.println(map);
+	}
+	
+}

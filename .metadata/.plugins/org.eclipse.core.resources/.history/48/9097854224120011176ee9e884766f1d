@@ -1,0 +1,17 @@
+package com.example.demo; //메퍼 파일만 만들면 테스트파일에서 sql 확인 가능
+
+import java.util.List;
+import java.util.Map;
+
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
+
+@Mapper
+public interface EmpMapper {
+	
+	
+	
+	@Select("select * from employees")
+	public List<Map> findall();
+	
+}

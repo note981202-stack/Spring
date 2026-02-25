@@ -1,0 +1,15 @@
+package com.example.demo;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+
+public class DiTest02 {
+	
+	@Autowired Resturant restaurant
+	
+	@Test
+	public void test() {
+		restaurant.getChef().toString();
+	}
+
+}

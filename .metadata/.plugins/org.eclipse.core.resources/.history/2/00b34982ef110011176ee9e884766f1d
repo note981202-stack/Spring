@@ -1,0 +1,10 @@
+package com.example.demo;
+
+import java.util.List;
+
+import org.springframework.stereotype.Repository;
+
+@Mapper
+public interface EmpMapper {
+    public List<EmpVO> getEmpList();
+}

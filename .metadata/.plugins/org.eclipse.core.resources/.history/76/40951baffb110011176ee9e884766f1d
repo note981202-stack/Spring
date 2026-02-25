@@ -1,0 +1,28 @@
+package com.example.demo;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+
+@SpringBootTest
+public class EmpMapperTest {
+	@Autowired EmpMapper empMapper;
+	
+	@Test
+	@DisplayName("사원단건조회")
+	public void getEmp() { //TOD(테스트 주도 개발)
+		//given
+		Integer employeeId = 100; //int
+		
+		//when
+		EmpVO vo = empMapper.getEmp(employeeId);
+		
+		//then
+		assertEquals(employeeId.toString(), vo.getEmployeeId());
+		
+	}
+	
+}

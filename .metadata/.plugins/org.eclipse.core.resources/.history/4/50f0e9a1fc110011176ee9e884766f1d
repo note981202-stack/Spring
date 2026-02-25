@@ -1,0 +1,40 @@
+package com.example.demo;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
+@Controller
+public class EmpController {
+	
+	@Autowired EmpMapper empMapper;
+	
+	@ResponseBody
+	@GetMapping("/api/emplist")
+	public List<EmpVO> emplist(){
+		
+		System.out.println("api/emplist 실행됨");
+		return empMapper.getEmpList();
+	}
+	
+	@ResponseBody
+	@GetMapping("/api/emplist")
+	public List<EmpVO> emp(Integer employeeId)){
+		log.warn("api/emp 실행됨" + employeeId);
+		return empMapper.getEmp(employeeId);
+	}
+	
+	@GetMapping("/emplist")
+	public String emp(Model model) {
+		model.addAttribute("empList", empMapper.getEmpList());
+		return "emp";
+	}
+	
+}

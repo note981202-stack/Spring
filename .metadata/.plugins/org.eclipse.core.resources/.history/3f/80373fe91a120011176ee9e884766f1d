@@ -1,0 +1,12 @@
+package com.example.demo02;
+
+import lombok.Data;
+
+@Data
+
+public class Restaurant {
+	private Chef chef;
+	
+
+	
+}

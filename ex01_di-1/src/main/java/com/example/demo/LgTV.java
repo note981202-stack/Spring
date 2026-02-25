@@ -1,0 +1,30 @@
+package com.example.demo;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+
+@Component("tv") // 컨테이너에 빈(객체)으로 등록
+//@Scope("prototype")
+//@Lazy(true) //getbean(시작)할때 생성이 됨
+@RequiredArgsConstructor
+public class LgTV implements TV {
+
+//	@Autowired
+	private final Speaker speaker; //등록받을때 
+	
+	public void powerOn() {
+		System.out.println("LG TV--전원 on");
+	}
+	public void powerOff() {
+		System.out.println("LG TV--전원 off");
+	}
+	public void volumeUp() {
+		speaker.volumeUp();
+	}
+	public void volumeDown() {
+		speaker.volumeDown();
+	}
+}

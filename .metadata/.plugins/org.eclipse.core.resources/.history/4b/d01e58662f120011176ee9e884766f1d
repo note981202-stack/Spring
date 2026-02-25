@@ -1,0 +1,29 @@
+// mybatis가 잘 작동하는지 확인하는 테스트 코드 
+
+package com.example.demo;
+
+import java.util.List;
+import java.util.Map;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+
+@SpringBootTest
+public class SqlSessionFactoryTest {
+
+	@Autowired EmpMapper empMapper;
+	
+	@Test
+	public void test() {
+		Map map =empMapper.findById(100);
+		System.out.println(map);
+	}
+	
+	@Test
+	public void findall() {
+		List<Map> list =empMapper.findall();
+		list.stream().forEach(System.out::println);
+	}
+	
+}

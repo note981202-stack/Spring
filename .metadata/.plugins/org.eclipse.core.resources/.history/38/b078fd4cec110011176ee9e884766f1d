@@ -1,0 +1,17 @@
+package com.example.demo;
+
+public class EmpVo {
+
+	public class EmpVO {
+		String employeeId;
+		String firstName;
+		String lastName;
+		String email;
+		Date  hireDate;
+		int    
+		salary;
+		String jobId;
+		String departmentId;
+		String managerId;
+		}
+}
