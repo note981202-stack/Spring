@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- Sql 작성하는 곳 -->
+  
+  <mapper namespace="com.example.demo.hr.mapper.EmpMapper"> <!--  empmapper.java이랑 이름이 같으면 됨 -->
+ 
+  
+  <!-- 프로시저 / 부서 등록  -->
+  <insert id = "insertDeptProc" 
+  		  statementType="CALLABLE">
+  {call add_department(
+  		#{departmentName},
+  		#{managerId},
+  		#{locationId}
+  ) } 
+  
+  
+  
+  
+  
+  
+  
+  </insert>  
+  
+   <sql id = "empColum">
+   EMPLOYEE_ID "employeeId"
+            ,FIRST_NAME "firstName"
+            ,LAST_NAME
+            ,EMAIL
+            ,PHONE_NUMBER
+            ,HIRE_DATE
+            ,JOB_ID
+            ,SALARY
+            ,COMMISSION_PCT
+            ,MANAGER_ID
+            ,DEPARTMENT_ID   
+   </sql>
+   
+   
+   
+   
+   
+   
+   
+   <delete id = "deleteByIds">
+    DELETE FROM employees 
+    WHERE
+   <foreach item="item" index="index" 
+   			collection="employeeId"
+            open="employee_id in (" 
+            separator="," 
+            close=")" nullable="true">
+       #{item}
+    </foreach>
+   
+   </delete>
+   
+   
+   
+   
+   
+   
+   
+   <delete id = "deleteById">
+   	  DELETE 
+   	 	FROM employees
+   	 	WHERE employee_id = #{id} 
+   </delete>
+   
+   
+   
+   
+   
+   
+   
+   
+   <select id ="findByDeptAndName" 
+   			parameterType = "map">                   <!--  파라미터의 값이 여러개이면 그냥 map적으면 됨 -->
+   		SELECT *
+   		FROM EMPLOYEES
+   		
+   		<where>
+	   		<if test ="deptId != null and !deptId.equals('')">
+	   		AND DEPARTMENT_ID = #{deptId}            <!-- empmapper 파일에서 파라미터의 이름을 그대로 받아야 됨 -->
+	   		</if>
+	   		
+	   		<if test = "fname !=null and ! fname.equals('')">
+	   		  AND LAST_NAME = #{fname}
+   		    </if>
+   	    </where> 
+   </select>
+   
+   
+   
+   
+   
+   
+   
+   
+      
+   <select id="findAll">
+   select
+   <include refid="empColum"></include>
+  	    from employees
+  	    <choose>
+		    <when test="order != null">order by ${order}</when>
+		    <otherwise>order by first_name </otherwise>
+  	    </choose>
+   </select>
+  
+  
+  
+  	 <select id = "findById" resultType="Employee"> <!-- map이 아니라 empvo 로 읽을려고 함 / EmpVO, alias Employee로 해도 됨-->
+  	 select 
+  	    <include refid="empColum"></include>
+  	 	from employees 
+  	    where employee_id = #{id}
+  	 </select>
+  
+  
+  
+  
+  
+  
+  	 <select id = "findByIdMap" resultType="map"> <!-- map으로 읽으려고 함/empmapper.java랑 같은 이름이어야 함 -->
+  	 select 
+  	    <include refid="empColum"></include>
+  	 	from employees 
+  	    where employee_id = #{id}
+  	 </select>
+  
+  
+  
+  
+  
+  
+  
+  	 <select id = "findAllMap">
+  	 select
+  	 	<include refid="empColum"></include>
+  	    from employees
+  	    order by employee_id
+  	 </select>
+  		
+  </mapper>

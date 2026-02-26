@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.example.demo.board.mapper.ReplyMapper"> <!-- replymapper.java 랑 이름이 같으면 됨-->
+  
+  <!-- sql 작성해서 넣으면 됨 -->
+  
+  <!--  등록 삭제 게시글 번호로 조회 -->
+
+
+<!-- 게시글 번호로 조회 -->  
+  <select id = "findByBno" resultType = "Reply">
+  select *
+  	from tbl_reply
+  	where BNO = #{BNO}
+  </select>
+  
+<!-- 댓글 번호로 삭제  -->
+<delete id = "deleteByRno">
+	DELETE
+	  FROM tbl_reply
+	  WHERE RNO = #{RNO}
+</delete>
+  
+ <!-- 댓글 등록 -->
+  <insert id = "insertReply">
+  	INSERT INTO tbl_reply (rno, bno, reply, replyer)
+	VALUES (4, 1, '개발중입니다', '개발자')  
+  </insert>
+  
+  
+  
+  
+  
+  
+  
+  
+  </mapper>

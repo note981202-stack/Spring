@@ -4,6 +4,14 @@
 	<section name="java.lang.Class">
 		<item key="replaceBarOpen" value="false"/>
 		<list key="findhistory">
+			<item value="insert"/>
+			<item value="삽입"/>
+			<item value="등록"/>
+			<item value="emdfhr"/>
+			<item value="삭제"/>
+			<item value="delete"/>
+			<item value="findall"/>
+			<item value="프로시"/>
 			<item value="test"/>
 			<item value="oracle"/>
 			<item value="tool"/>

@@ -1,1 +1,21 @@
 1772007042892	Rename type 'EmpDao'
+1772066002381	Move compilation unit
+1772066015013	Copy package
+1772066037342	Delete element
+1772066097471	Move compilation unit
+1772066098751	Move file
+1772066183632	Move file
+1772066846445	Rename type 'SqlSessionFactoryTest'
+1772066897071	Move compilation unit
+1772084783016	Rename type 'DepartmentDIO'
+1772087174633	Delete element
+1772087227732	Copy package
+1772087346755	Rename type 'DepartmentDTO'
+1772087355621	Rename type 'EmpMapper'
+1772087361407	Rename type 'EmpVO'
+1772087516551	Delete element
+1772087517909	Delete element
+1772087519334	Delete element
+1772087621461	Copy package
+1772087627457	Delete element
+1772088712281	Rename type 'ReplyVo'
