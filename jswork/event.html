@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Event.html</title>
+    <script
+      src="https://code.jquery.com/jquery-4.0.0.js"
+      integrity="sha256-9fsHeVnKBvqh3FB2HYu7g2xseAZ5MlN6Kz/qnkASV8U="
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <ul id="result">
+      <li data-id="1">사과</li>
+      <li data-id="2">바나나</li>
+    </ul>
+    <script>
+      // $("li").on("click", (e) => {
+      //   $(e.target).css("backgroundColor", "purple");
+      // });
+
+      // (이벤트 위임 - 그룹 이벤트) 이벤트 한번에 처리하기 위해서 제일 상위에만 이벤트를 처리 함
+      $("ul").on("click", "li", (e) => {
+        $(e.target).css("backgroundColor", "purple");
+        //alert(e.target.dataset.id); // 클릭하면 알러트 창도 출력되게 됨
+        alert($(e.target).data("id")); // jquery로 작성하는 방법
+      });
+      $("#result").append("<li data-id='3'>수박</li>");
+    </script>
+  </body>
+</html>

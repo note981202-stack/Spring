@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sample.html</title>
+    <script
+      src="https://code.jquery.com/jquery-4.0.0.js"
+      integrity="sha256-9fsHeVnKBvqh3FB2HYu7g2xseAZ5MlN6Kz/qnkASV8U="
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <div id="result"></div>
+    <script>
+      fetch("http://127.0.01:8080/ex05")
+        .then((Response) => Response.json())
+        .then((json) => {
+          console.log(json);
+
+          //위의 주소에 정보를 출력하게 하기 위해서 for문 돌려서 화면에 띄움
+          for (i = 0; i < json.length; i++) {
+            $("#result").append(
+              `<div>${json[i].regDate} ${json[i].hobby} ${json[i].username}</div>`,
+            );
+          }
+        });
+    </script>
+  </body>
+</html>

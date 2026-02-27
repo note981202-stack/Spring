@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sample.html</title>
+    <script
+      src="https://code.jquery.com/jquery-4.0.0.js"
+      integrity="sha256-9fsHeVnKBvqh3FB2HYu7g2xseAZ5MlN6Kz/qnkASV8U="
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+  
+  <!-- 게시글 정보 -->
+  <h1>게시글 상세보기</h1>
+  게시글: 1번의 댓글 목록입니다 <br>
+  <br><div></div>
+  
+  
+  <div>
+      <input id="replyText" />
+      <input id="replyer" />
+      <button type="button" id="btnsave">등록</button>
+    </div>
+    
+  <!-- 댓글 목록 -->
+  	<div id="reply"></div>
+  	
+  	
+    <script>
+    
+    //bno 1번의 내용이 출력되게 함
+    const bno = 1;
+    
+    fetch(`http://127.0.0.1:8080/api/board/${bno}/reply`)
+    .then((Response) => Response.json())
+    .then((json) => {
+      console.log(json);
+      
+      for (let i = 0; i < json.length; i++) {
+          $("#reply").prepend(
+            `<div>
+            <button data-rno="${json[0].rno}"type="button"> X </button>
+            ${json[i].reply} ${json[0].replyer}
+            </div>`
+          );
+        }
+    });
+    
+    
+    //등록
+    $("#btnsave").on("click", (e) => {
+    	fetch(`http://127.0.0.1:8080/api/board/${bno}/reply` , {
+          method: "POST",
+          body: JSON.stringify({
+            reply: $("#replyText").val(),
+            replyer: $("#replyer").val(),
+            bno: 1,
+          }),
+          headers: {
+            "Content-type": "application/json; charset=UTF-8",
+          },
+        })
+          //화면에 등록된 글을 추가 하기 위함
+          .then((response) => response.json())
+          .then((json) => {
+            console.log(json);
+            $("#reply").prepend(`
+             <div>
+              <button data-rno="${json.rno}" type="button"> X </button>
+            ${json.reply} ${json.replyer}
+            </div>
+            `);
+          });
+      });
+    
+    
+    
+    //삭제버튼 생성해서 삭제 되도록
+    $("#reply").on("click", "button", (e) => {
+    	const rno = $(e.target).data("rno")
+    	const target = $(e.target);
+    	fetch(`http://127.0.0.1:8080/api/reply/${rno}`, {
+            method: "DELETE",
+    })
+	    .then((response) => response.json())
+	    .then((json) => {
+	      target.parent().remove(); //삭제 기능
+	    }),
+	    alert($(e.target).data("rno")); //알림
+});
+    	
+    
+    </script>
+  </body>
+</html>

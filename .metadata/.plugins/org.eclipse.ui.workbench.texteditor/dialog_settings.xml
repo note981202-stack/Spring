@@ -4,6 +4,11 @@
 	<section name="java.lang.Class">
 		<item key="replaceBarOpen" value="false"/>
 		<list key="findhistory">
+			<item value="id"/>
+			<item value="prepend"/>
+			<item value="reply"/>
+			<item value="for"/>
+			<item value="12."/>
 			<item value="insert"/>
 			<item value="삽입"/>
 			<item value="등록"/>
@@ -14,7 +19,6 @@
 			<item value="프로시"/>
 			<item value="test"/>
 			<item value="oracle"/>
-			<item value="tool"/>
 		</list>
 	</section>
 </section>
