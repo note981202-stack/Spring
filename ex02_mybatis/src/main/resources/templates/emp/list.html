@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"><head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+.red{color:red;}
+.back{background-color:gray;}
+</style>
+</head>
+<body>
+<h1>사원조회</h1>
+  <table border="1">
+  <thead>
+  <a th:href="@{/emp/register}">등록으로 이동</a>
+  <tr>
+    <th>no</th>
+    <th>employeeId</th>
+    <th>firstName</th>
+    <th>salary</th>
+    <th>hireDate</th>
+    <th>입사년도</th>
+   </tr>
+  </thead>
+  <tbody>
+    <tr th:each="emp : ${list}" th:class="${empStat.even}?'back':''">
+      <td th:text="${empStat.count}">1</td>
+      <td> [[${emp.employeeId}]]</td>
+      <td ><a th:href="@{/emp/info/{id}(id=${emp.employeeId})}" th:text="|${emp.firstName}  ${emp.lastName}|">Scott King</a></td>
+	  <td th:text="${#numbers.formatInteger(emp.salary,3,'COMMA')}" th:class="${emp.salary < 10000} ? 'red' : ''">2,700</td>      
+	  <td th:text="${#dates.format(emp.hireDate, 'yyyy/mm/dd'  )}">2010/10/10</td>
+	  <td th:text="${#dates.year(emp.hireDate) }">2010</td>
+    </tr>  
+  </tbody>
+  
+  </table>
+</html>

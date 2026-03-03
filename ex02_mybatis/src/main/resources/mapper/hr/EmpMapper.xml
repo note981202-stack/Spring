@@ -16,14 +16,7 @@
   		#{locationId}
   ) } 
   
-  
-  
-  
-  
-  
-  
   </insert>  
-  
    <sql id = "empColum">
    EMPLOYEE_ID "employeeId"
             ,FIRST_NAME "firstName"
@@ -37,10 +30,39 @@
             ,MANAGER_ID
             ,DEPARTMENT_ID   
    </sql>
+ 
+     
    
-   
-   
-   
+   <insert id="insert">
+   <selectKey keyProperty="employeeId" resultType="String" order="BEFORE">
+   select EMPLOYEES_SEQ.nextval from dual
+   </selectKey>
+   insert into employees(
+   		EMPLOYEE_ID
+		,FIRST_NAME
+		,LAST_NAME
+		,EMAIL
+		,HIRE_DATE
+		,SALARY
+		,COMMISSION_PCT
+		,JOB_ID
+		,DEPARTMENT_ID
+		,MANAGER_ID
+		,PHONE_NUMBER)
+   values (
+	#{employeeId}
+   ,#{firstName}
+   ,#{lastName}
+   ,#{email}
+   ,#{hireDate}
+   ,#{salary}
+   ,#{commissionPct}
+   ,#{jobId}
+   ,#{departmentId}
+   ,#{managerId}
+   ,#{phoneNumber}
+   )
+   </insert>
    
    
    
@@ -54,13 +76,7 @@
             close=")" nullable="true">
        #{item}
     </foreach>
-   
    </delete>
-   
-   
-   
-   
-   
    
    
    <delete id = "deleteById">
@@ -68,12 +84,6 @@
    	 	FROM employees
    	 	WHERE employee_id = #{id} 
    </delete>
-   
-   
-   
-   
-   
-   
    
    
    <select id ="findByDeptAndName" 
@@ -93,13 +103,6 @@
    </select>
    
    
-   
-   
-   
-   
-   
-   
-      
    <select id="findAll">
    select
    <include refid="empColum"></include>
@@ -114,13 +117,26 @@
   
   	 <select id = "findById" resultType="Employee"> <!-- map이 아니라 empvo 로 읽을려고 함 / EmpVO, alias Employee로 해도 됨-->
   	 select 
-  	    <include refid="empColum"></include>
-  	 	from employees 
-  	    where employee_id = #{id}
+  	    EMPLOYEE_ID 
+            ,FIRST_NAME 
+            ,LAST_NAME
+            ,EMAIL
+            ,PHONE_NUMBER
+            ,HIRE_DATE
+            ,e.JOB_ID
+            ,j.JOB_TITLE
+            ,SALARY
+            ,e.COMMISSION_PCT
+            ,e.MANAGER_ID
+            ,e.DEPARTMENT_ID
+            ,d.DEPARTMENT_NAME
+            from employees e 
+            LEFT JOIN departments d
+            ON e.department_id = d.department_id
+            JOIN JOBS J 
+            ON e.job_id = j.job_id
+            where employee_id = #{id}
   	 </select>
-  
-  
-  
   
   
   
@@ -130,11 +146,6 @@
   	 	from employees 
   	    where employee_id = #{id}
   	 </select>
-  
-  
-  
-  
-  
   
   
   	 <select id = "findAllMap">

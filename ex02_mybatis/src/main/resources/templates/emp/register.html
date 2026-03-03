@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+.error{color:red;}
+</style>
+</head>
+<body>
+<h1>사원등록/수정</h1>
+<div class="card" th:object="${emp}">
+<form method="post">
+  <div class="card-body">
+	<div class ="row mb-2 border-bottom">
+		<div class="col-3">사번</div>
+		<div class="col-9 fw-bold"><input th:field="*{employeeId}"></div>
+	</div>
+	
+	
+	<div class ="row mb-2 border-bottom">
+		<div class="col-3">first name</div>
+		<div class="col-9 fw-bold"><input th:field="*{firstName}">
+		<div class="error" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" >
+		</div>
+		
+	</div>
+	
+	<div class ="row mb-2 border-bottom">
+		<div class="col-3">last name</div>
+		<div class="col-9 fw-bold"><input th:field="*{lastName}">
+		<div class="error" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" >
+	</div>
+</div>
+	</div>
+	
+	<div class ="row mb-2 border-bottom">
+		<div class="col-3">email</div>
+		<div class="col-9 fw-bold"><input th:field="*{email}"></div>
+	</div>
+	
+	<div class ="row mb-2 border-bottom">
+		<div class="col-3">입사년월</div>
+		<div class="col-9 fw-bold"><input th:field="*{hireDate}">
+		<div class="error" th:if="${#fields.hasErrors('hireDate')}" th:errors="*{hireDate}" >
+	</div>
+</div>
+	
+	<div class ="row mb-2 border-bottom">
+		<div class="col-3">급여</div>
+		<div class="col-9 fw-bold"><input th:field="*{salary}"></div>
+	</div>
+	
+	<div class ="row mb-2 border-bottom">
+		<div class="col-3">수당</div>
+		<div class="col-9 fw-bold"><input th:field="*{commissionPct}"></div>
+	</div>
+	
+	<div class ="row mb-2 border-bottom">
+		<div class="col-3">직업 명</div>
+		<div class="col-9 fw-bold">
+		  <select th:field="*{jobId}">
+			<option th:each="job : ${jobList}" 
+  					th:value="${job.jobId}" 
+					th:text="${job.jobTitle}">
+			</select>
+		</div>
+	</div>
+	
+	<div class ="row mb-2 border-bottom">
+		<div class="col-3">부서 번호</div>
+		<div class="col-9 fw-bold"><select th:field="*{departmentId}">
+									<option th:each="dept : ${deptList}" 
+									        th:value="${dept.departmentId}" 
+									        th:text="${dept.departmentName}">
+									</select></div>
+	</div>
+	
+	<div class ="row mb-2 border-bottom">
+		<div class="col-3">managerId</div>
+		<div class="col-9 fw-bold"><input th:field="*{managerId}"></div>
+	</div>
+	
+	<div class ="row mb-2 border-bottom">
+		<div class="col-3">전화 번호</div>
+		<div class="col-9 fw-bold"><input th:field="*{phoneNumber}"></div>
+	</div>
+
+	
+	<div>
+	<button>등록</button>
+	</form>
+	</div>
+</body>
+</html>

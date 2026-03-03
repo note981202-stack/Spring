@@ -17,6 +17,9 @@ public class EmpVO {  //xml 파일에 result id를
 		Integer salary;
 		Double commissionPct;
 		String jobId;
+		String jobTitle;
 		String departmentId;
 		String managerId;
+		String phoneNumber;
+		String departmentName;
 }

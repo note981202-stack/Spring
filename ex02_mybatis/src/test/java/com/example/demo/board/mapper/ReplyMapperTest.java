@@ -14,19 +14,19 @@ public class ReplyMapperTest {
 	@Autowired ReplyMapper replyMapper;
 	
 
-//	@Test //테스트 완료
-	@DisplayName("RNO 번호 목록 조회")
-	public void findByBno() {
-		//given
-		Integer bno = 1;
-		
-		//when
-		ReplyVO vo = replyMapper.findByBno(bno); // ReplyVO가 데이터 타입이야
-		
-		
-		//then -결과 출력
-		System.out.println(vo);
-	}
+////	@Test //테스트 완료
+//	@DisplayName("RNO 번호 목록 조회")
+//	public void findByBno() {
+//		//given
+//		Integer bno = 1;
+//		
+//		//when
+////		ReplyVO vo = replyMapper.findByBno(bno); // ReplyVO가 데이터 타입이야
+//		
+//		
+//		//then -결과 출력
+//		System.out.println(vo);
+//	}
 	
 //	@Test //삭제 완료
 	@DisplayName("BNO로 삭제")

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+</head>
+<body>
+<h1>사원상세조회</h1>
+<a class="btn btn-danger" th:href="@{/emp/delete(id=${emp.employeeId})}">
+    사원 정보 삭제
+</a>
+<div class="card">
+  <div class="card-body">
+	<div class ="row mb-2 border-bottom">
+		<div class="col-3">사번</div>
+		<div class="col-9 fw-bold" th:text=${emp.employeeId}></div>
+	</div>
+	
+	<div class ="row mb-2 border-bottom">
+		<div class="col-3">부서번호</div>
+		<div class="col-9 fw-bold" th:text=${emp.departmentId}></div>
+	</div>
+	
+	<div class ="row mb-2 border-bottom">
+		<div class="col-3">부서명</div>
+		<div class="col-9 fw-bold" th:text=${emp.jobId}></div>
+	</div>
+	
+	<div class ="row mb-2 border-bottom">
+		<div class="col-3">직업명</div>
+		<div class="col-9 fw-bold" th:text=${emp.jobTitle}></div>
+	</div>
+	
+	
+	<div class ="row mb-2 border-bottom">
+		<div class="col-3">name</div>
+		<div class="col-9 fw-bold" th:text="${emp.firstName} + ' ' + ${emp.lastName}"></div>
+	</div>
+	
+	<div class ="row mb-2 border-bottom">
+		<div class="col-3">급여(수당)</div>
+		<div class="col-9 fw-bold"
+     th:text="|${#numbers.formatInteger(emp.salary,3,'COMMA')}
+              (${emp.commissionPct != null ? emp.commissionPct : 0})|">
+		</div>
+	</div>
+	
+	<div class ="row mb-2 border-bottom">
+		<div class="col-3">입사년월</div>
+		<div class="col-9 fw-bold" th:text="${#dates.format(emp.hireDate, 'yyyy/mm/dd'  )}" 2010/10>
+	</div>
+	
+	
+	<div>
+	<!-- <a class = "btn btn-info" th:href="@{}>수정</a> -->
+	<!-- <a class = "btn btn-info" th:href="@{}>삭제</a> -->
+	</div>
+	
+	</div>
+</body>
+</html>

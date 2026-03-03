@@ -16,6 +16,7 @@ public class EmpRestController {
 
 	@Autowired EmpMapper empMapper;
 	
+	
 	@GetMapping("/api/emp")
 	@ResponseBody // json변환 => 컨트롤러 + 리스폰스 바디 = 레스트 컨트롤러
 	public List<EmpVO> emp() {
