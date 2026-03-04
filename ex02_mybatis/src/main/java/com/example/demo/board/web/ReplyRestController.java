@@ -33,16 +33,15 @@ public class ReplyRestController {
 	};
 	
 	
-	
-	//댓글 등록
+	//댓글등록
 	@PostMapping("/board/{bno}/reply")
-	public List<ReplyVO> insert(@PathVariable Integer bno,
-								@RequestBody ReplyVO vo) {
-		
-		vo.setBno(bno);
-		replyMapper.insertReply(vo);
-		
-		return replyMapper.findByRno(vo.getRno());
+	public ReplyVO insert(@PathVariable Integer bno,
+	                      @RequestBody ReplyVO vo) {
+
+	    vo.setBno(bno);
+	    replyMapper.insertReply(vo);
+
+	    return replyMapper.findByRno(vo.getRno()).get(0);
 	}
 	
 	

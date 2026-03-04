@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+ 	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{common/layout}">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sample.html</title>
+    <script
+      src="https://code.jquery.com/jquery-4.0.0.js"
+      integrity="sha256-9fsHeVnKBvqh3FB2HYu7g2xseAZ5MlN6Kz/qnkASV8U="
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+  <div  layout:fragment="content">
+  
+  <h3>게시글 상세 조회</h3>
+	<a class="btn btn-danger" th:href="@{/board/delete(id=${board.bno})}"> 게시글 삭제 </a>  
+  
+  <div class="card">
+  <div class="card-body">
+	<div class ="row mb-2 border-bottom">
+		<div class="col-3">bno</div>
+		<div class="col-9 fw-bold" th:text=${board.bno}></div>
+	</div>
+	
+	<div class ="row mb-2 border-bottom">
+		<div class="col-3">제목</div>
+		<div class="col-9 fw-bold" th:text=${board.title}></div>
+	</div>
+	
+	<div class ="row mb-2 border-bottom">
+		<div class="col-3">내용</div>
+		<div class="col-9 fw-bold" th:text=${board.content}></div>
+	</div>
+	
+	<div class ="row mb-2 border-bottom">
+		<div class="col-3">작성자</div>
+		<div class="col-9 fw-bold" th:text=${board.writer}></div>
+	</div>
+	
+	<div class ="row mb-2 border-bottom">
+		<div class="col-3">등록 시간</div>
+		<div class="col-9 fw-bold" th:text=${board.regdate}></div>
+	</div>
+	
+	<div class ="row mb-2 border-bottom">
+		<div class="col-3">수정 시간</div>
+		<div class="col-9 fw-bold" th:text=${board.updatedate}></div>
+	</div>
+	
+	
+  </div>
+</div>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <!-- 게시글 정보 -->
+ <div id="board" th:data-bno="${board.bno}">
+  게시글: <span th:text="${board.bno}"></span> 번의 댓글 목록입니다
+</div>
+  
+  
+  <div>
+      <input id="replyText">댓글 </input>
+      <input id="replyer">댓글 작성자 </input>
+      <button type="button" id="btnsave">등록</button>
+    </div>
+    
+  <!-- 댓글 목록 -->
+  	<div id="reply"></div>
+  	
+  	
+    <script>
+    
+    //bno 1번의 내용이 출력되게 함
+   const bno = $("#board").data("bno");
+    
+    fetch(`http://127.0.0.1:8080/api/board/${bno}/reply`)
+    .then((Response) => Response.json())
+    .then((json) => {
+      console.log(json);
+      
+      for (let i = 0; i < json.length; i++) {
+          $("#reply").prepend(
+            `<div>
+            <button data-rno="${json[i].rno}"type="button"> X </button>
+            ${json[i].reply} ${json[i].replyer}
+            </div>`
+          );
+        }
+    });
+    
+    
+    //등록
+    $("#btnsave").on("click", (e) => {
+    	fetch(`http://127.0.0.1:8080/api/board/${bno}/reply` , {
+          method: "POST",
+          body: JSON.stringify({
+            reply: $("#replyText").val(),
+            replyer: $("#replyer").val(),
+            bno: bno,
+          }),
+          headers: {
+            "Content-type": "application/json; charset=UTF-8",
+          },
+        })
+          //화면에 등록된 글을 추가 하기 위함
+          .then((response) => response.json())
+          .then((json) => {
+            console.log(json);
+            $("#reply").prepend(`
+             <div>
+              <button data-rno="${json.rno}" type="button"> X </button>
+            ${json.reply} ${json.replyer}
+            </div>
+            `);
+          });
+      });
+    
+    
+    
+    //삭제버튼 생성해서 삭제 되도록
+    $("#reply").on("click", "button", (e) => {
+    	const rno = $(e.target).data("rno")
+    	const target = $(e.target);
+    	fetch(`http://127.0.0.1:8080/api/reply/${rno}`, {
+            method: "DELETE",
+    })
+	    .then((response) => response.json())
+	    .then((json) => {
+	      target.parent().remove(); //삭제 기능
+	    }),
+	    alert($(e.target).data("rno")); //알림
+});
+    	
+    </script>
+  </body>
+</html>

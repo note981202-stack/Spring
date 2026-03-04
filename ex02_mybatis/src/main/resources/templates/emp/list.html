@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org"><head>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+ 	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{common/layout}">
+<head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
@@ -7,9 +10,14 @@
 .back{background-color:gray;}
 </style>
 </head>
+
 <body>
-<h1>사원조회</h1>
+<div  layout:fragment="content">
+<h1 th:utext="#{home.welcome}"></h1> <!-- properties파일의 메세지를 불러올때 "#{}"을 호출함 -->
+<h1>사원조회 <!--/* ( [[ ${#lists.size(list)} ]] ) */-->건</h1>
+
   <table border="1">
+  
   <thead>
   <a th:href="@{/emp/register}">등록으로 이동</a>
   <tr>
@@ -19,18 +27,41 @@
     <th>salary</th>
     <th>hireDate</th>
     <th>입사년도</th>
+    <th>매니저</th>
    </tr>
   </thead>
+  
   <tbody>
     <tr th:each="emp : ${list}" th:class="${empStat.even}?'back':''">
       <td th:text="${empStat.count}">1</td>
       <td> [[${emp.employeeId}]]</td>
       <td ><a th:href="@{/emp/info/{id}(id=${emp.employeeId})}" th:text="|${emp.firstName}  ${emp.lastName}|">Scott King</a></td>
-	  <td th:text="${#numbers.formatInteger(emp.salary,3,'COMMA')}" th:class="${emp.salary < 10000} ? 'red' : ''">2,700</td>      
+	  <td th:text="${#numbers.formatInteger(emp.salary,3,'COMMA')}" 
+	  	  class ="sal" th:classappend="${emp.salary < 10000} ? 'red' : ''">2,700</td>      
+	  	  
 	  <td th:text="${#dates.format(emp.hireDate, 'yyyy/mm/dd'  )}">2010/10/10</td>
 	  <td th:text="${#dates.year(emp.hireDate) }">2010</td>
+	  <td>
+	  	<span th:if="${emp.managerId == null}">없음</span> <!-- if, unless문 조건이 맞다면 if문이 출력되고 아니라면 unless문이 출력 됨 -->
+	  	<span th:unless="${emp.managerId == null}" th:text="${emp.managerId}"></span>
+	  </td>
     </tr>  
-  </tbody>
   
   </table>
+  
+  <div>
+  <b>SALARY 총 합:</b>
+<span th:text="${#aggregates.sum(list.?[salary != null].![salary])}"></span>
+  </div>
+  
+  	<div th:insert="~{common/paging::paging(${1}, ${5})}"></div>
+  
+  <script th:inline="javascript">
+  const array = /* [[${list}]] */[];
+  
+  
+    </script>
+  </div>
+  </tbody>
+  
 </html>

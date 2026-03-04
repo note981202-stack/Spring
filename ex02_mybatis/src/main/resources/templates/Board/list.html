@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+ 	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{common/layout}">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+.red{color:red;}
+.back{background-color:gray;}
+</style>
+</head>
+<body>
+<div layout:fragment="content">
+
+<h1> 게시글 조회 총 (  [[ ${#lists.size(list)} ]] )건 </h1>
+
+<table border="1">
+
+<thead>
+<tr>
+	<th>No.</th>
+	<th>bno</th>
+	<th>제목</th>
+	<th>내용</th>
+	
+</tr>
+</thead>
+
+<tbody>
+  <tr th:each="board : ${list}" th:class="${boardStat.even}?'back':''">
+  	<td th:text="${boardStat.count}">1</td>
+  	<td th:text="${board.bno}"></td>
+  	<td><a th:href="@{/board/info/{id}(id=${board.bno})}" th:text="${board.title}"></a></td>
+  	<td th:text="${board.content}"></td>
+  </tr>
+</tbody>
+
+</table>
+</div>
+</body>
+</html>

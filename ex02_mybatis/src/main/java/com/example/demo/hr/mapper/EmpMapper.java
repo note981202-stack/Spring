@@ -23,6 +23,8 @@ public interface EmpMapper {
 	//수정
 	int upadate(EmpVO vo);
 	
+	
+	
 	int deleteByIds(Integer[] employeeId);
 	public List<EmpVO> findByDeptAndName(   //부서명 이름 조회
 			@Param("deptId") String dept, 

@@ -1,11 +1,14 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+ 	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{common/layout}">
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+
 </head>
 <body>
+<div  layout:fragment="content">
 <h1>사원상세조회</h1>
 <a class="btn btn-danger" th:href="@{/emp/delete(id=${emp.employeeId})}">
     사원 정보 삭제
@@ -58,5 +61,6 @@
 	</div>
 	
 	</div>
+  </div>
 </body>
 </html>

@@ -11,6 +11,7 @@ public class SampleController {
 
 	@GetMapping("/sample")  //인터넷 리소스 리저브
 	public String sample(Model model) {
+		int a = 5/0;
 		model.addAttribute("today", new Date(). toString()); 
 		return "/sample"; // viewresolver : templates/sample.html 
 		

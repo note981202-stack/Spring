@@ -2,23 +2,32 @@
 <section name="Workbench">
 	<item key="hasShownOverlayPopupBefore" value="true"/>
 	<section name="java.lang.Class">
-		<item key="replaceBarOpen" value="false"/>
+		<item key="replaceBarOpen" value="true"/>
 		<list key="findhistory">
-			<item value="id"/>
-			<item value="prepend"/>
-			<item value="reply"/>
-			<item value="for"/>
-			<item value="12."/>
-			<item value="insert"/>
-			<item value="삽입"/>
+			<item value="bno: 1"/>
+			<item value="replyText"/>
 			<item value="등록"/>
-			<item value="emdfhr"/>
-			<item value="삭제"/>
-			<item value="delete"/>
-			<item value="findall"/>
-			<item value="프로시"/>
-			<item value="test"/>
-			<item value="oracle"/>
+			<item value="version"/>
+			<item value="empmapper"/>
+			<item value="empMapper"/>
+			<item value="emp"/>
+			<item value="empService"/>
+			<item value="EmpMapper"/>
+			<item value="Mapper"/>
+			<item value="totla"/>
+			<item value="div"/>
+			<item value="list"/>
+			<item value="post"/>
+			<item value="&lt;a href=&quot;&quot;&gt;등록으로 이동&lt;/a&gt;"/>
 		</list>
+		<list key="replacehistory">
+			<item value="empService"/>
+			<item value="EmpService"/>
+			<item value="Service"/>
+		</list>
+	</section>
+	<section name="org.eclipse.ui.texteditor.GotoLineAction$GotoLineDialog_dialogBounds">
+		<item key="DIALOG_X_ORIGIN" value="724"/>
+		<item key="DIALOG_Y_ORIGIN" value="392"/>
 	</section>
 </section>
