@@ -18,6 +18,7 @@
 <table border="1">
 
 <thead>
+<a th:href="@{/board/register}">게시글 작성 으로 이동</a>
 <tr>
 	<th>No.</th>
 	<th>bno</th>
@@ -28,7 +29,7 @@
 </thead>
 
 <tbody>
-  <tr th:each="board : ${list}" th:class="${boardStat.even}?'back':''">
+  <tr th:each="board, boardStat : ${list}" th:class="${boardStat.even}?'back':''">
   	<td th:text="${boardStat.count}">1</td>
   	<td th:text="${board.bno}"></td>
   	<td><a th:href="@{/board/info/{id}(id=${board.bno})}" th:text="${board.title}"></a></td>

@@ -3,8 +3,33 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+.error{color:red;}
+</style>
 </head>
 <body>
-
+<h1>게시글 등록/수정</h1>
+<div class="card" th:object="${board}">
+<form method="post">
+  <div class="card-body">
+  
+  <div class ="row mb-2 border-bottom">
+		<div class="col-3">제목</div>
+		<div class="col-9 fw-bold"><input th:field="*{title}"></div>
+  </div>
+  
+  <div class ="row mb-2 border-bottom">
+    <div class="col-3">내용</div>
+    <div class="col-9 fw-bold">
+        <input th:field="*{content}">
+        <div class="error"
+             th:if="${#fields.hasErrors('content')}"
+             th:errors="*{content}">
+        </div>
+    </div>
+</div>
+</div>
+</form>
+</div>
 </body>
 </html>
