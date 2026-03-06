@@ -4,6 +4,8 @@
 	<section name="java.lang.Class">
 		<item key="replaceBarOpen" value="true"/>
 		<list key="findhistory">
+			<item value="data"/>
+			<item value="h2"/>
 			<item value="bno: 1"/>
 			<item value="replyText"/>
 			<item value="등록"/>
@@ -17,8 +19,6 @@
 			<item value="totla"/>
 			<item value="div"/>
 			<item value="list"/>
-			<item value="post"/>
-			<item value="&lt;a href=&quot;&quot;&gt;등록으로 이동&lt;/a&gt;"/>
 		</list>
 		<list key="replacehistory">
 			<item value="empService"/>

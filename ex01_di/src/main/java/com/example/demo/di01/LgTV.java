@@ -1,8 +1,6 @@
 package com.example.demo.di01;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 @Component("tv") // 컨테이너에 빈(객체)으로 등록
