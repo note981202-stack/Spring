@@ -1,17 +1,15 @@
-package com.example.demo;
+package com.example.demo.config.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.LogoutConfigurer;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 @Configuration
 @EnableWebSecurity
@@ -28,23 +26,30 @@ class WebSecurityConfig {
 		// @formatter:off
 		http
 			.authorizeHttpRequests((requests) -> requests    // 접근 제한
-				.requestMatchers("/", "/home").permitAll()
-				.requestMatchers("/admin").hasRole("ADMIN") // admin롤 을 가진자만 접근가능
-				.anyRequest().authenticated()
+				.requestMatchers("/", "/home", "/login").permitAll()
+				.requestMatchers("/admin", "/admin/**").hasRole("ADMIN") // admin롤 을 가진자만 접근가능
+				.anyRequest().authenticated()  // 로그인해야만 사용가능
 			)
 			.formLogin((form) -> form
 				.loginPage("/login")
+				.successHandler(authenticationSuccessHandler())
 				.permitAll()
 			)
-			.logout(LogoutConfigurer::permitAll);
+			.logout(LogoutConfigurer::permitAll)
+			.csrf( c-> c.disable() );
 		// @formatter:on
 
 		return http.build();
 	}
 
 	@Bean
+	public AuthenticationSuccessHandler authenticationSuccessHandler() {
+		return new CustomLoginSuccessHandler();
+	}
+	
+	@Bean
 	PasswordEncoder passwordEncoder() {     				//암호화 해줌
-		return new BCryptPasswordEncoder();
+		return new BCryptPasswordEncoder(10);
 	}
 
 //	@Bean

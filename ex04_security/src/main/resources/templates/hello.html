@@ -10,5 +10,7 @@
         <form th:action="@{/logout}" method="post">
             <input type="submit" value="Sign Out"/>
         </form>
+        
+        <div>deptName: <span th:text="${session.deptName}"></span></div>
     </body>
 </html>

@@ -30,7 +30,7 @@ public class UserDTO implements UserDetails{
 //			}
 //			return auth;
 		  
-		  //아래의 코드가 위랑 같은 것
+		  //아래의 코드가 위랑 같은 것 (람다식)
 		  return roles.stream().map(r-> new SimpleGrantedAuthority(r.getRoleName()))
 		  .collect(Collectors.toList());
 	  }
@@ -39,4 +39,7 @@ public class UserDTO implements UserDetails{
 	public String getUsername() {
 		return this.loginId;
 	}
+	
+	
+	
 }

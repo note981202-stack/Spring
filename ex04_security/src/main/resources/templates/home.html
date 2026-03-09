@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	  xmlns:th="https://www.thymeleaf.org"   
+	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     <head>
         <title>Spring Security Example</title>
     </head>
@@ -7,5 +9,22 @@
         <h1>Welcome!</h1>
 
         <p>Click <a th:href="@{/hello}">here</a> to see a greeting.</p>
-    </body>
+        
+
+		
+    	<!-- authorize 속성 -->
+    	<div sec:authorize="isAnonymous()">로그인 전</div>
+    	
+    	
+    	<div sec:authorize="isAuthenticated()">(로그인된 경우)
+        <!-- 로그인된 사용자 정보 -->
+        <!-- authentication 속성 -->
+    	<span sec:authentication="name">관리자</span>
+    	<span sec:authentication="principal.username">관리자</span>
+    	<span sec:authentication="principal.authorities">권한</span>
+    	</div>
+    	
+    	
+    	<div sec:authorize="hasRole('ROLE_ADMIN')">어드민 권한이 있으면</div>
+    	</body>
 </html>

@@ -29,9 +29,9 @@ public class UserServiceImpl implements UserService, UserDetailsService{
 	}
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		UserDTO user = userMapper.getUser(username);
+		UserDTO user = userMapper.getUser(username);  //DB에서 username으로 조회
 		if(user == null) {
-			throw new UsernameNotFoundException("not found");
+			throw new UsernameNotFoundException("not found"); // 사용자가 없으면 로그인 실패
 		}
 		return user; //new User(user.getLoginId(), user.getPassword(), auth);
 	}
