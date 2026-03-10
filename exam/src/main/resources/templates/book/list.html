@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+ 	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{common/layout}">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<style>
+.red{color:red;}
+.back{background-color:gray;}
+</style>
+<body>
+	<div layout:fragment="content">
+	<h1>도서 조회/수정</h1>
+	<table border="1">
+	
+ <thead>
+  <tr>
+    <th>도서번호</th>
+    <th>도서명</th>
+    <th>표지</th>
+    <th>출판일자</th>
+    <th>금액</th>
+    <th>출판사</th>
+    <th>도서소개</th>
+   </tr>
+  </thead>
+	
+	<tbody>
+	<tr th:each="book, bookStat : ${list}" th:class="${bookStat.even}?'back':''">
+	
+	  <td th:text="${book.bookNo}"></td>	
+	  <td th:text="${book.bookName}"></td>	
+	  <td th:text="${book.bookCoverimg}"></td>	
+	  <td th:text="${#dates.format(book.bookDate, 'yyyy/MM/dd')}">2010/10/10</td>	
+	  <td th:text="${#numbers.formatInteger(book.bookPrice, 3, 'COMMA')}"></td>	
+	  <td th:text="${book.bookPublisher}"></td>	
+	  <td th:text="${book.bookInfo}"></td>	
+	</tr>
+	</tbody>
+	</table>
+	</div>
+	
+</body>
+</html>

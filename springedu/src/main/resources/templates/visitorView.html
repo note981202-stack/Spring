@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+<link rel="stylesheet" href="css/visitor.css">
+</head>
+<body>
+  <div class="container">
+	<div class="card">
+	<div class="card-header">
+	<h1 class="text-center">방명록 글 리스트</h1>
+	</div>
+	<div class="card-body">
+		<table th:if="${list}" class="table">
+			<tr th:each="vo : ${list}">
+				<td>[[${vo.name }]]</td>
+				<td>[[${vo.writeDate }]]</td>
+				<td>[[${vo.memo }]]</td>
+				<td><a th:href="@{/vdelete(id=${vo.id})}"> <img src="/images/delete.png" width="38"></a></td>
+				<td><img src="/images/edit.png" width="38" th:onclick="|displayUpdateForm(${vo.id})|"></td>
+			</tr>
+		</table>
+
+		<h3 th:if="${msg}"  th:text="${ msg }"></h3>
+		<hr>
+	</div>
+	<div class="card-footer d-flex justify-content-center">
+		<a href="/visitorMain.html" ><button class="btn btn-primary">메인페이지로 돌아가기</button></a>
+	</div>
+	</div>
+	
+	<div id="updateform" style="display: none">
+		<div class="card">
+			<div class="card-body">
+				<h2>글을 수정하세요</h2>
+				<hr>
+				<form method="post" action="/vupdate">
+					<input type="hidden" name="id" value=""> 
+					<input type="text"  name="name" value="" required><br>
+					<textarea cols="35" rows="10" name="memo" required></textarea>
+					<br> <input type="submit" value="수정"> <input
+						type="reset" value="재작성" onclick="resetForm();return false;">
+					<input type="button" value="취소"
+						onclick="document.getElementById('updateform').style.display='none'">
+				</form>
+			</div>
+		</div>
+	</div>
+  </div>
+	<script>
+	let jsonobj = null;
+	let namedom = null;
+	let memodom = null;
+	function displayUpdateForm(id) {
+		let xhr = new XMLHttpRequest();
+		xhr.onload = function() {
+			if (xhr.status == 200) {
+				document.getElementById('updateform').style.display='block';
+				let iddom = document.querySelector("#updateform input[name=id]");
+				namedom = document.querySelector("#updateform input[name=name]");
+				memodom = document.querySelector("#updateform textarea");
+				jsonobj = JSON.parse(xhr.responseText);
+				iddom.value = jsonobj.id;
+				namedom.value = jsonobj.name;
+				memodom.value = jsonobj.memo;								
+			}
+		};
+		xhr.open('GET', '/one?id='+id, true);
+		xhr.send();
+	}
+	function resetForm() {
+		if (jsonobj) {
+			namedom.value = jsonobj.name;
+			memodom.value = jsonobj.memo;
+		}
+	}
+</script>
+</body>
+</html>

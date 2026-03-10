@@ -10,6 +10,9 @@
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
+			<item value="도서 정보/"/>
+			<item value="lay"/>
+			<item value="my"/>
 			<item value="stomp"/>
 			<item value="stopm"/>
 			<item value="invaild"/>
@@ -22,9 +25,6 @@
 			<item value="replyText"/>
 			<item value="등록"/>
 			<item value="version"/>
-			<item value="empmapper"/>
-			<item value="empMapper"/>
-			<item value="emp"/>
 		</list>
 		<list key="replacehistory">
 			<item value="empService"/>

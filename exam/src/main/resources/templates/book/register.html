@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+ 	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{common/layout}">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div layout:fragment="content">
+<h1>도서 등록</h1>
+<form method="post">
+<div class="card" th:object="${book}">
+	<div class="card-body">
+	
+	<div class ="row mb-2 border-bottom">
+    	<div class="col-3">도서번호</div>
+    	<div class="col-9 fw-bold">
+        <input th:field="*{bookNo}" readonly>
+    	</div>
+	</div>	
+	
+	<div class ="row mb-2 border-bottom">
+    	<div class="col-3">도서명</div>
+    	<div class="col-9 fw-bold">
+        <input th:field="*{bookName}" required></div>
+	</div>
+	
+	<div class ="row mb-2 border-bottom">
+		<div class="col-3">도서표지</div>
+		<div class="col-9 fw-bold"><input th:field="*{bookCoverimg}"></div>
+	</div>
+	
+	<div class ="row mb-2 border-bottom">
+		<div class="col-3">출판일자</div>
+		<div class="col-9 fw-bold"><input th:field="*{bookDate}"></div>
+	</div>
+	
+	<div class ="row mb-2 border-bottom">
+		<div class="col-3">금액</div>
+		<div class="col-9 fw-bold"><input th:field="*{bookPrice}"></div>
+	</div>
+	
+	<div class ="row mb-2 border-bottom">
+		<div class="col-3">출판사</div>
+		<div class="col-9 fw-bold"><input th:field="*{bookPublisher}"></div>
+	</div>
+	
+	<div class ="row mb-2 border-bottom">
+		<div class="col-3">도서소개</div>
+		<div class="col-9 fw-bold"><input th:field="*{bookInfo}"></div>
+	</div>						
+	<button>등록</button>
+	<button>조회</button>
+	
+	</form>
+	</div>
+	
+</body>
+</html>

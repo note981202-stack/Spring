@@ -24,7 +24,7 @@ public interface EmpMapper {
 	int upadate(EmpVO vo);
 	
 	
-	
+	//단건 삭제
 	int deleteByIds(Integer[] employeeId);
 	public List<EmpVO> findByDeptAndName(   //부서명 이름 조회
 			@Param("deptId") String dept, 

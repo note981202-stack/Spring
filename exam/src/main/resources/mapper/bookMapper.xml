@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.exam.book.service.impl.BookMapper">
+  
+  <!-- 도서목록 전체 조회 -->
+  <select id="findAll">
+  select * from BOOK_TBL_06
+  order by BOOK_NO
+  </select>
+  
+  <!-- 도서 등록 -->
+  <insert id="insert">
+  <selectKey keyProperty="bookNo" resultType="Integer" order="BEFORE">
+	select BOOK_SEQ.nextval from dual  
+  </selectKey>
+  insert into BOOK_TBL_06(
+		BOOK_NO           
+		,BOOK_NAME              
+		,BOOK_COVERIMG           
+		,BOOK_DATE                   
+		,BOOK_PRICE              
+		,BOOK_PUBLISHER          
+		,BOOK_INFO  )
+  values (
+   #{bookNo}
+  ,#{bookName}
+  ,#{bookCoverimg}
+  ,#{bookDate}
+  ,#{bookPrice}
+  ,#{bookPublisher}
+  ,#{bookInfo}
+)
+  </insert>
+  
+  <!-- 도서 대여 목록전체 -->
+  <select id="findRentAll">
+  select * from RENT_TBL_06
+  group by BOOK_NO;
+	</select>  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </mapper>
